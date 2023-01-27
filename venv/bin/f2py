@@ -1,4 +1,4 @@
-#!/home/s/mango/venv/bin/python
+#!/home/s/mango/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
