@@ -13,3 +13,6 @@ From the repo directory root:
 
     source venv/bin/activate
     pip install -r requirements.txt
+
+mango-markets.ipynb
+
