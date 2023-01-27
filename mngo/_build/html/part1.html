@@ -1,0 +1,608 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>The Exploit &#8212; Mango Markets Attack</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Risk Management for DEX / DAO" href="part2.html" />
+    <link rel="prev" title="About" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Mango Markets Attack</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    About
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   The Exploit
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="part2.html">
+   Risk Management for DEX / DAO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="part3.html">
+   Risk Management for Investors
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/part1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/part1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-mango-markets">
+   What is Mango Markets?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-perps">
+   What are “perps”?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-price-data">
+   The Price Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-choose-an-economic-target">
+     How to choose an economic target?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#september-2022-security-audit">
+   02 September 2022 Security Audit
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>The Exploit</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-mango-markets">
+   What is Mango Markets?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-perps">
+   What are “perps”?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-price-data">
+   The Price Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-choose-an-economic-target">
+     How to choose an economic target?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#september-2022-security-audit">
+   02 September 2022 Security Audit
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="the-exploit">
+<h1>The Exploit<a class="headerlink" href="#the-exploit" title="Permalink to this headline">#</a></h1>
+<hr class="docutils" />
+<p>Avi Eisenberg gives an extensive interview dated October 28, 2022, where he describes his trading strategy which absorbed $116M in 1 day and bankrupted a DAO known as Mango Markets.  He also discusses his attempt to remit value back to users who could not withdraw deposits.</p>
+<p>Interview Link:</p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=e-y4WmrndQ4">https://www.youtube.com/watch?v=e-y4WmrndQ4</a></p>
+<p>The analyses in this project will have no effect on other “real hacks” like the bridge security attack on Wormhole in February 2022.</p>
+<p>Data Download Link:</p>
+<p><a class="reference external" href="https://coincodex.com/crypto/mango-markets/historical-data/">https://coincodex.com/crypto/mango-markets/historical-data/</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;mango-markets_2018-01-20_2023-01-19.csv&#39;</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+<span class="c1"># Normalise the data between 0 and 1</span>
+<span class="c1"># for market cap and volume</span>
+<span class="n">x</span><span class="p">[</span><span class="s1">&#39;Market Cap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Market Cap&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Market Cap&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Market Cap&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Market Cap&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="n">x</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="what-is-mango-markets">
+<h2>What is Mango Markets?<a class="headerlink" href="#what-is-mango-markets" title="Permalink to this headline">#</a></h2>
+<p>From the docs:</p>
+<p>Mango Markets provides a single venue to lend, borrow, swap, and leverage-trade crypto assets through a powerful risk engine.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>* Earn interest on deposits
+* Cross-Margin / Cross-Collateralised
+* Decentralised
+</pre></div>
+</div>
+<p>Mango Markets Documentation:</p>
+<p><a class="reference external" href="https://docs.mango.markets/">https://docs.mango.markets/</a></p>
+<p>Mango Markets is built on the Solana blockchain and utilises Serum DEX for spot margin trading while perpetual futures are traded on Mango Markets’ own order book. Mango Markets is governed by MNGO token holders via the Mango Decentralized Autonomous Organization (DAO).</p>
+<p>There is still one massive holder with ~20x the amount of MNGO as the next biggest wallet.  It is unclear if this is Eisenberg, the MNGO Upgrade Committee, or somebody else.</p>
+<p><img alt="Current MNGO Holders" src="_images/holders.png" /></p>
+<p>A 4th version of Mango Markets is in development, but a release date has not been suggested.</p>
+</section>
+<section id="what-are-perps">
+<h2>What are “perps”?<a class="headerlink" href="#what-are-perps" title="Permalink to this headline">#</a></h2>
+<p>From the Mango Markets docs:</p>
+<p>“Perpetuals allow initial leverage of up to 10x, and maintenance leverage of 20x. If the value of your position (or collateral) falls and your leverage exceeds 20x, your account will be eligible for liquidation.”</p>
+<p>Perps are perpetual futures from a protocol that allows for high performance trades with no intermediaries or custodians, with options for offering liquidity or leverage on a variety of assets.</p>
+<p>Perps Documentation:</p>
+<p><a class="reference external" href="https://docs.perp.com/">https://docs.perp.com/</a></p>
+</section>
+<section id="the-price-data">
+<h2>The Price Data<a class="headerlink" href="#the-price-data" title="Permalink to this headline">#</a></h2>
+<p>The mountainous region on the left is what normal trading looks like.  The ups and downs are relevant to the disparities among the prices.  The spike on the right is the Mango Markets Fiasco. Not hard to detect if it happens slowly.  Solana is known for being swift.</p>
+<p>There are tiered scale benefits on the taker fee scheme, there is a fixed low fee for the maker rate, and borrowing and lending are free.  In essence, Eisenberg was completely valid in his statements about trading strategy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_price_info</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="c1"># Plot the data</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Open&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Open&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;High&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;High&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Low&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Low&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Close&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Volume&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Market Cap&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Market Cap&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Visual tweaks</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Close&#39;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Volume&#39;</span><span class="p">,</span> <span class="s1">&#39;Market Cap&#39;</span><span class="p">])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;dark_background&#39;</span><span class="p">)</span>
+    <span class="c1"># thin lines</span>
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">():</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">plot_price_info</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;MNGO Trading History Priced in USD&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/part1_3_0.png" src="_images/part1_3_0.png" />
+</div>
+</div>
+<p>By making a big splash with these perpetual futures, one can borrow on unrealized gains (specifically, withdrawals in currencies not under attack).  Eisenberg held a couple of accounts with around $5M each and he drove up the price by purchasing back and forth bweteen these accounts and borrowing on the margins.</p>
+<p>He has hinted that his team had some tricks for getting their transactions processed first.  It was maybe overpowered hardware programmed in a low-level language, extremely low-latency connections, or massive unmatchable gas fees.</p>
+<p>From this article:</p>
+<p><a class="reference external" href="https://www.coindesk.com/consensus-magazine/2022/12/30/the-impact-of-avraham-eisenbergs-case-on-the-future-of-crypto/">https://www.coindesk.com/consensus-magazine/2022/12/30/the-impact-of-avraham-eisenbergs-case-on-the-future-of-crypto/</a></p>
+<p>‘Eisenberg’s operation was not exactly a surprise, as the risks of such attacks on decentralized collateralized lending are well known and Eisenberg did not invent this strategy. Sam Bankman-Fried, the ex-CEO of FTX, even tweeted his own prescient observations of the danger of using an illiquid token such as MNGO as collateral. Weeks later, the SEC cited these tweets as evidence that SBF “knew, or was reckless in not knowing, that by not mitigating for the impact of large and illiquid tokens posted as collateral by Alameda, FTX was engaging in precisely the same conduct, and creating the same risk, that he was warning against” with Mango.’</p>
+<p>Identical language appears in the statement from the case being levied by the SEC this week.</p>
+<p>Official SEC Statement dated January 23, 2023:</p>
+<p><a class="reference external" href="https://www.sec.gov/litigation/litreleases/2023/lr25623.htm">https://www.sec.gov/litigation/litreleases/2023/lr25623.htm</a></p>
+<p><img alt="Eisenberg on Zhong" src="_images/avi_on_zhong.png" /></p>
+<p>This tweet from November 7 was made in reference to the <a class="reference external" href="http://justice.gov">justice.gov</a> release statement about their historic seizure of over 50k BTC a year before, available here:</p>
+<p><a class="reference external" href="https://www.justice.gov/usao-sdny/pr/us-attorney-announces-historic-336-billion-cryptocurrency-seizure-and-conviction">https://www.justice.gov/usao-sdny/pr/us-attorney-announces-historic-336-billion-cryptocurrency-seizure-and-conviction</a></p>
+<p>For the purposes of creating a strategy to detect or combat this, we should take the following statements as functionally true:</p>
+<p>His team did not implement any exploits on the protocol, they did not coerce anybody to act on their behalf, and they did not engage in any form of cybersecurity gotcha.  They used the platform exactly as directed.</p>
+<section id="how-to-choose-an-economic-target">
+<h3>How to choose an economic target?<a class="headerlink" href="#how-to-choose-an-economic-target" title="Permalink to this headline">#</a></h3>
+<p>Eisenberg outlines his approach a when asked if his actions fit with the intent of the developers.</p>
+<p>He states that their intent can never be perfectly clear, and figuring that out is not just about going through the documentation.  You must also go through the source code to see if the tool lines up with the way it is supposed to function.</p>
+<p>The acount that accepted the value that liquidated the platform was associated with Eisenberg’s discord handle ponzishorter.eth, which is a big clue toward what he calls a beneficial trading strategy.</p>
+<p>He probably picked MNGO because trading volume across the platform had sunk to a base level for a long time, indicating scammable traders who were for some reason still present.  There were still many holdout types waiting for the price to explode back to previous levels.  Perhaps these were mostly the dev team.  The timing may have been related to the security audit released September 02.</p>
+<p>He examined the docs and the source code to ensure that there were combined borrowing and lending operations, and that liquidity was available.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_price_info</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;2022-10-06&#39;</span><span class="p">:</span><span class="s1">&#39;2022-10-15&#39;</span><span class="p">],</span> <span class="s2">&quot;October 6 to 15, 2022&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/part1_5_0.png" src="_images/part1_5_0.png" />
+</div>
+</div>
+<p>On October 10, he drove up the price, getting benefits in maker fees for being large scale, and the exponential increase of his trades on loans can be seen inverted in the market cap!  I wish I had access to finer data.</p>
+<p>Then on October 11, the price naturally levels out when all the liquidity has been taken out on loan and removed from the system. Data with higher definition is difficult to find, mangolorians stops offering  detailed information after October 14.</p>
+</section>
+</section>
+<section id="september-2022-security-audit">
+<h2>02 September 2022 Security Audit<a class="headerlink" href="#september-2022-security-audit" title="Permalink to this headline">#</a></h2>
+<p>Neodyme Mango Markets Security Audit:
+<a class="reference external" href="https://1610690202-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MVID3wF97zSdsTruiIC%2Fuploads%2FNJ586BURL5wI6mPgIX05%2FMango%20Markets%20audit.pdf?alt=media&amp;token=03d4956b-6f29-4371-8d6a-b2c432de7949">https://1610690202-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces/-MVID3wF97zSdsTruiIC/uploads/NJ586BURL5wI6mPgIX05/Mango Markets audit.pdf?alt=media&amp;token=03d4956b-6f29-4371-8d6a-b2c432de7949</a></p>
+<p>Ruling out common classes of Solana contract vulnerabilities, such as:</p>
+<ul class="simple">
+<li><p>Missing ownership checks,</p></li>
+<li><p>Missing signer checks,</p></li>
+<li><p>Signed invocation of unverified programs,</p></li>
+<li><p>Solana account confusions,</p></li>
+<li><p>Re-initiation with cross-instance confusion,</p></li>
+<li><p>Missing freeze authority checks,</p></li>
+<li><p>Insufficient SPL token account verification,</p></li>
+<li><p>Missing rent exemption assertion,</p></li>
+<li><p>Casting truncation,</p></li>
+<li><p>Arithmetic over- or underflows,</p></li>
+<li><p>Numerical precision errors.</p></li>
+</ul>
+<p>Other checks:</p>
+<ul class="simple">
+<li><p>Checking for unsafe design that might lead to common vulnerabilities being introduced in the
+future,</p></li>
+<li><p>Checking for any other, as-of-yet unknown classes of vulnerabilities arising from the structure of
+the Solana blockchain,</p></li>
+<li><p>Ensuring that the contract logic correctly implements the project specifications,</p></li>
+<li><p>Examining the code in detail for contract-specific low-level vulnerabilities,</p></li>
+<li><p>Ruling out denial-of-service attacks,</p></li>
+<li><p>Ruling out economic attacks,</p></li>
+<li><p>Checking for instructions that allow front-running or sandwiching attacks,</p></li>
+<li><p>Checking for rug-pull mechanisms or hidden backdoors,</p></li>
+<li><p>Checking for replay protection.</p></li>
+</ul>
+<p>The findindings were all resolved or acknowledged:</p>
+<ul class="simple">
+<li><p>Orderbook sides were not sufficiently verified</p></li>
+<li><p>Perp value calculation can overflow</p></li>
+<li><p>Missing vault check in resolve_token_bankruptcy</p></li>
+<li><p>Deposit does not trigger interest update</p></li>
+<li><p>RootBankCache timeout inconsistency</p></li>
+</ul>
+<p>Nothing listed concerns market risk.  These are risks to infrastructure and credit.  For our purposes, the exploit we have seen was of a purely economic nature, and it did not take advantage of any technical issue with the system.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">About</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="part2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Risk Management for DEX / DAO</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Sam Reeves<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
